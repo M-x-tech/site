@@ -1,0 +1,28 @@
+---
+export interface Props {
+  name: string
+  start: number
+  url?: string | null
+  img?: string
+  end?: number | string | null
+}
+
+const { name, url = null, img, start, end = null } = Astro.props
+---
+
+<div class="relative">
+  {img && <img src={`/images/projects/${img}`} class="md:mb-4 rounded-2xl" />}
+
+  <div
+    class={`${img ? 'md:absolute' : ''} bottom-3 right-3 left-3 rounded-2xl md:bg-white px-5 py-4 md:px-8 md:py-6`}
+  >
+    <div class="flex items-center justify-between mb-4">
+      <h4 class={`font-bold ${url ? 'underline' : ''} text-black`}>
+        {url ? <a href={url}>{name}</a> : name}
+      </h4>
+      <p class="text-black">{start}{end ? `—${end}` : ''}</p>
+    </div>
+
+    <p><slot /></p>
+  </div>
+</div>

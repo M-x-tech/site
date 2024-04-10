@@ -1,0 +1,6 @@
+* install
+
+#+BEGIN_SRC sh
+mkvirtualenv m-x-site --python=3.11
+poetry --no-ansi install
+#+END_SRC
