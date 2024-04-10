@@ -8,7 +8,11 @@ from typing import Optional
 from pydantic import BaseModel, EmailStr, Field
 import aiofiles
 
-origins = ["http://127.0.0.1:4321", "localhost:4321", "https://M-x.tech", "*"]
+origins = [
+    "http://127.0.0.1:4321",
+    "http://localhost:4321",
+    "https://M-x.tech",
+]
 
 root_path = "/api/v1"
 app = FastAPI(root_path=root_path)
