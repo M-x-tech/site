@@ -26,7 +26,7 @@
             console.log({ jsonData })
 
             // Submit form data
-            await fetch('http://127.0.0.1:8000/api/v1/guestbook', {
+            await fetch('https://lodder.dev/m-x-site/api/v1/guestbook', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(jsonData),
@@ -34,7 +34,7 @@
 
             // Fetch the updated list
             const response = await fetch(
-              'http://127.0.0.1:8000/api/v1/guestbook',
+              'https://lodder.dev/m-x-site/api/v1/guestbook',
             )
             console.log({ response })
 
@@ -43,7 +43,7 @@
           async fetchEntries() {
             console.log('fetching entries')
             const response = await fetch(
-              'http://127.0.0.1:8000/api/v1/guestbook',
+              'https://lodder.dev/m-x-site/api/v1/guestbook',
             )
             this.entries = await response.json()
           },
@@ -59,27 +59,45 @@
     <header class="text-center">
       <div class="h-60"></div>
       <h1 class="text-6xl mb-12" style="color: cyan">M-x</h1>
-      <p class="text-pale text-lg">
-        Welcome to the <span class="dream inline-block"></span> Site of M-x
-      </p>
+
+      <div class="flex flex-col items-center">
+        <img
+          src="/silver-chain.webp"
+          style="object-fit:contain;"
+          class="my-4"
+        />
+
+        <p class="text-pale text-lg">
+          Welcome to the <span class="dream inline-block"></span> Site of M-x
+        </p>
+
+        <img
+          src="/silver-chain.webp"
+          style="object-fit:contain;"
+          class="my-4"
+        />
+      </div>
     </header>
+
     <main>
       <section id="hit-counter" class="marquee">
         <marquee class="text-creamy-white text-lg">
           Number of Page Visitors: <span
             style="color: cyan"
-            hx-get="http://127.0.0.1:8000/api/v1/counter"
+            hx-get="https://lodder.dev/m-x-site/api/v1/counter"
             hx-trigger="load"
             hx-swap="innerHTML">[Counter]</span
           >
         </marquee>
       </section>
 
-      <img
-        src="/tesseract.gif"
-        alt="Tesseract"
-        class="mx-auto w-auto h-auto mt-28 mb-28"
-      />
+      <div class="flex justify-center">
+        <div class="flex gap-6 items-center mx-auto mt-24 mb-20">
+          <img src="/computer.gif" class="w-32 h-auto" />
+
+          <img src="/tesseract.gif" alt="Tesseract" class="w-auto h-auto" />
+        </div>
+      </div>
 
       <section class="flex items-center justify-center mb-10">
         <a href="https://info.flagcounter.com/pWi4"
@@ -176,9 +194,15 @@
           alt="world wide web - connecting people since 1991"
         /><br />
       </div>
+      <div class="flex justify-center mb-12">
+        <img src="/under-construction.gif" class="w-auto h-auto" />
+      </div>
 
       <footer class="text-center text-creamy-white mb-10">
-        <p>&copy; 2021 M-x</p>
+        <p>
+          &copy; <span x-data="{ date: new Date().getFullYear()}" x-text="date"
+          ></span> M-x
+        </p>
       </footer>
     </main>
   </body>

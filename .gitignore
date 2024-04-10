@@ -1,3 +1,7 @@
+.firebase
+firebase-debug.log
+srv
+
 # build output
 dist/
 # generated types
