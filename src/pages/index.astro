@@ -47,6 +47,23 @@
             )
             this.entries = await response.json()
           },
+          rainbowText: function (text) {
+            let colors = [
+              'red',
+              'orange',
+              'yellow',
+              'green',
+              'blue',
+              'indigo',
+              'violet',
+            ]
+            let html = ''
+            for (let i = 0; i < text.length; i++) {
+              let color = colors[i % colors.length] // Cycle through the colors
+              html += `<span style="color: ${color};">${text[i]}</span>`
+            }
+            return html
+          },
           init() {
             console.log('init')
             this.fetchEntries() // Fetch entries on component initialization
@@ -91,23 +108,19 @@
         </marquee>
       </section>
 
+      <div class="h-20"></div>
+
+      <h2 class="text-2xl text-creamy-white mb-4 text-center">
+        ✧･ﾟ: *✧･ﾟ:* What We Do *:･ﾟ✧*:･ﾟ✧
+      </h2>
+
       <div class="flex justify-center">
-        <div class="flex gap-6 items-center mx-auto mt-24 mb-20">
+        <div class="flex gap-6 items-center mx-auto mb-20">
           <img src="/computer.gif" class="w-32 h-auto" />
 
           <img src="/tesseract.gif" alt="Tesseract" class="w-auto h-auto" />
         </div>
       </div>
-
-      <section class="flex items-center justify-center mb-10">
-        <a href="https://info.flagcounter.com/pWi4"
-          ><img
-            src="https://s11.flagcounter.com/count/pWi4/bg_1100FF/txt_FFB0E7/border_A216CC/columns_3/maxflags_14/viewers_visitors/labels_0/pageviews_0/flags_0/percent_0/"
-            alt="Flag Counter"
-            border="0"
-          /></a
-        >
-      </section>
 
       <section class="text-center container mx-auto" x-data="guestbook">
         <h2 class="text-3xl text-creamy-white mb-4">
@@ -146,20 +159,31 @@
             required></textarea>
           <button
             type="submit"
-            class="mt-4 text-creamy-white text-shadow-navy py-2 px-4 underline text-3xl font-light"
-            >Submit</button
+            class="mt-4 text-creamy-white text-shadow-navy py-2 px-4 underline text-2xl font-light"
+            >Submit your Entry!</button
           >
         </form>
         <div class="h-20"></div>
         <h2 class="text-4xl text-creamy-white mb-4">ThE GuesT BooK</h2>
+        <section class="flex items-center justify-center mt-8">
+          <a href="https://info.flagcounter.com/pWi4"
+            ><img
+              src="https://s11.flagcounter.com/count/pWi4/bg_1100FF/txt_FFB0E7/border_A216CC/columns_3/maxflags_14/viewers_visitors/labels_0/pageviews_0/flags_0/percent_0/"
+              alt="Flag Counter"
+              border="0"
+            /></a
+          >
+        </section>
         <table class="mt-12 mb-40 w-full table-auto">
           <tbody id="messages" class="text-white font-serif">
             <template x-for="entry in entries" :key="entry.id">
               <tr>
                 <td x-text="entry.name"></td>
                 <td x-text="entry.email"></td>
-                <td x-text="entry.music" style="color: cyan"></td>
-                <td x-text="entry.url"></td>
+                <td x-html="rainbowText(entry.music)"></td>
+                <td
+                  x-html="`<a href='${entry.url}' target='_blank' class='underline'>${entry.url}</a>`"
+                ></td>
                 <td x-text="entry.comment"></td>
               </tr>
             </template>
